@@ -1,0 +1,11 @@
+#container {
+    border-style: dashed;
+    border-color: lightseagreen;
+    width: 600px;
+    text-align: center;
+}
+
+#todoCard {
+    background-color: darkgrey;
+    width: 500px;
+}

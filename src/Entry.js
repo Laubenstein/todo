@@ -1,7 +1,8 @@
-import { todofactory } from './TodoFactory'
+import { todoForm } from './TodoForm'
 
 //This is the main view / Entry point of the app
-let allTodos = [{title: 'asdf', description: 'asdfasdfasdf', dueDate: '21.11.2020'}];
+let allTodos = [{title: 'asdf', description: 'asdfasdfasdf', dueDate: '21.11.2020'}, 
+                {title: 'saugen', description: 'Die ganze Wohnung saugen', dueDate: 'Samstag'}];
 
 //Creates the main view
 const renderMain = () => {
@@ -13,6 +14,7 @@ const renderMain = () => {
 
     container.appendChild(newTodoButton);
 
+    //Print all todos
     if (allTodos.length < 1) {
         let title = document.createElement('p');
         let noTodoText = document.createTextNode('No Todos found. Create one!');
@@ -21,9 +23,20 @@ const renderMain = () => {
     } else {
         for (let todo of allTodos) {
             let todoCard = document.createElement('div');
+            todoCard.setAttribute('id', 'todoCard');
+
             let titlePara = document.createElement('p');
             titlePara.innerHTML = todo.title;
             todoCard.appendChild(titlePara);
+
+            let descriptionPara = document.createElement('p');
+            descriptionPara.innerHTML = todo.description;
+            todoCard.appendChild(descriptionPara);
+
+            let datePara = document.createElement('p');
+            datePara.innerHTML = "Due on " + todo.dueDate;
+            todoCard.appendChild(datePara);
+
             container.appendChild(todoCard);
         }
     }
@@ -32,47 +45,5 @@ const renderMain = () => {
     }
 
 
-const todoForm = () => {
-    let container = document.getElementById('container');
 
-    let formDiv = document.createElement('div');
-    formDiv.setAttribute('id', 'formDiv');
-    
-    let titleField = document.createElement('INPUT');
-    titleField.setAttribute('type', 'text')
-    titleField.setAttribute('placeholder', 'Title');
-    
-    let descriptionField = document.createElement('INPUT');
-    descriptionField.setAttribute('type', 'text');
-    descriptionField.setAttribute('placeholder', 'Description');
-    
-    let dueDate = document.createElement('INPUT');
-    let dueDateLabel = document.createElement('Label');
-    dueDate.setAttribute('id', 'dueDate');
-    dueDateLabel.setAttribute('for', dueDate);
-    dueDateLabel.innerHTML = "Due Date";
-    dueDate.setAttribute('type', 'date');
-
-    let submitButton = document.createElement('input');
-    submitButton.setAttribute('type', 'submit');
-    submitButton.addEventListener('click', function () {
-        let todo = todofactory(
-            titleField.value,
-            descriptionField.value,
-            dueDate.value
-        );
-        todos.push(todo);
-        
-
-    });
-
-    formDiv.appendChild(titleField);
-    formDiv.appendChild(descriptionField);
-    formDiv.appendChild(dueDateLabel);
-    formDiv.appendChild(dueDate);
-    formDiv.appendChild(submitButton);
-
-    container.appendChild(formDiv);
-}
-
-export {renderMain, todoForm, allTodos}
+export {renderMain, allTodos}
