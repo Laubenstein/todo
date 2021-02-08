@@ -32,7 +32,7 @@ const todoForm = () => {
             dueDate.value
         );
         allTodos.push(todo);
-        location.reload();
+        container.innerHTML = "";
         renderMain();
     });
     
